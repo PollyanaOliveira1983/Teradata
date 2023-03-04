@@ -1,0 +1,61 @@
+entra no banco de dados especifico
+
+database pollyana.ferreira@capgemini.com;
+
+Visualizar como a tabela foi criada
+show table employee;
+
+Renomear a tabela
+Rename table "pollyana.ferreira@capgemini.com".employee to "pollyana.ferreira@capgemini.com".emp_new; 
+
+CREATE TABLE 
+permite que você especifique se deseja ou não permitir linhas duplicadas em sua tabela.
+
+MULTISET
+permite linhas duplicadas.
+
+Altera a tabela retira o FALLBACK e adiciona uma coluna 
+ALTER TABLE emp_new, NO FALLBACK
+ADD salary_level BYTEINT;
+
+Seleciona os itens da tabela
+Select * from emp_new;
+
+Cria Unique Index na tabela
+CREATE  UNIQUE  INDEX   (salary_level)   ON  emp_new;
+
+Insere informaçoes na tabela criada copiando de outra existente
+INSERT INTO "pollyana.ferreira@capgemini.com".emp_new SELECT * FROM "marcos.nagato@capgemini.com".employee;
+INSERT INTO "pollyana.ferreira@capgemini.com".emp_new SELECT * FROM CustomerService.employee;
+
+Drop a coluna
+Alter table emp_new drop salary_level;
+
+Drop a tabela
+drop table emp_new;
+
+Visualiza os index
+HELP INDEX emp_new;
+
+
+CREATE MACRO
+Create Macro LocationMacro2 as 
+	(
+		Select customer_number
+				,Cast (city as char(14))
+				,Cast (state as char(14))
+				,zip_code
+		FROM CustomerService.location	
+		Where state = 'Illinois'
+		Order By state, city, zip_code;
+	);
+	
+exec LocationMacro2;	
+
+Execute a macro com um simples comando chamado EXECUTE ou EXEC
+Execute ...
+Exc ....
+
+Use o DRO MACRO pra deletar a macro
+Drop Macro .....
+
