@@ -873,13 +873,6 @@ SELECT DEP_SEASON from flights;
 Verificar frequência do novo campo, validar verificando as faixas mínimas e máximas de atraso das categorias.
 Obs.: recomendado utilizar COMPRESS.
 
-
-Além das transformações nas 3 tabelas, vamos já deixar criada uma tabela de domínio para o campo carrier (cia aérea), com os valores abaixo:
-AA : American Airlines AS : Alaska Airlines B6 : Jetblue Airways DL : Delta Airlines
-F9 : Frontier Airlines HA : Hawaiian Airlines OO : Skywest Airlines UA : United Airlines US : US Airways
-VX : Virgin America
-WN : Southwest Airlines
-
 alter table flights
 add dep_delay_category char(6) format $6.;
     
@@ -896,4 +889,28 @@ set dep_delay_category = compress(
 
 select dep_delay_category from flights;
 
+Além das transformações nas 3 tabelas, vamos já deixar criada uma tabela de domínio para o campo carrier (cia aérea), com os valores abaixo:
+AA : American Airlines AS : Alaska Airlines B6 : Jetblue Airways DL : Delta Airlines
+F9 : Frontier Airlines HA : Hawaiian Airlines OO : Skywest Airlines UA : United Airlines US : US Airways
+VX : Virgin America
+WN : Southwest Airlines
 
+
+sel distinct carrier from flights;
+
+create table carrier (
+codigo char(2) not null,
+descr varchar(18)
+) primary index (codigo);
+
+insert into carrier values ('AA', 'American Airlines');
+insert into carrier values ('AS', 'Alaska Airlines');
+insert into carrier values ('B6', 'Jetblue Airways');
+insert into carrier values ('DL', 'Delta Airlines');
+insert into carrier values ('F9', 'Frontier Airlines');
+insert into carrier values ('HA', 'Hawaiian Airlines');
+insert into carrier values ('OO', 'Skywest Airlines');
+insert into carrier values ('UA', 'United Airlines');
+insert into carrier values ('US', 'US Airways');
+insert into carrier values ('VX', 'Virgin America');
+insert into carrier values ('WN', 'Southwest Airlines');
